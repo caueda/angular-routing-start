@@ -11,6 +11,15 @@ import { UserComponent } from './users/user/user.component';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
 import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
+import { Route, RouterModule } from '@angular/router';
+
+const appRoutes: Route[] = [
+  { path: '', component: HomeComponent},
+  { path: 'users', component: UsersComponent},
+  { path: 'users/:id', component: UserComponent},
+  { path: 'servers', component: ServersComponent},
+  { path: 'servers/:id/edit', component: EditServerComponent}
+];
 
 @NgModule({
   declarations: [
@@ -25,6 +34,7 @@ import { ServersService } from './servers/servers.service';
   imports: [
     BrowserModule,
     FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [ServersService],
   bootstrap: [AppComponent]
