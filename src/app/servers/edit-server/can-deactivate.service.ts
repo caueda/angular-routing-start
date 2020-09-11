@@ -11,9 +11,9 @@ export class CanDeactivateService implements OnInit, CanDeactivate<CanComponentD
     constructor() {}
     ngOnInit() {}
 
-    canDeactivate(component: CanComponentDeactivate, 
-        currentRoute: ActivatedRouteSnapshot, 
-        currentState: RouterStateSnapshot, 
+    canDeactivate(component: CanComponentDeactivate,
+        currentRoute: ActivatedRouteSnapshot,
+        currentState: RouterStateSnapshot,
         nextState?: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         return component.canDeactivate();
     }

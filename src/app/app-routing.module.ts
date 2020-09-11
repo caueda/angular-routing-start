@@ -1,3 +1,4 @@
+import { ServerResolverService } from './servers/server/server-resolver.service';
 import { CanDeactivateService } from './servers/edit-server/can-deactivate.service';
 import { AuthGuardService } from './auth-guard.service';
 import { NgModule } from '@angular/core';
@@ -20,7 +21,7 @@ const appRoutes: Route[] = [
       canActivateChild: [AuthGuardService],
       component: ServersComponent,
       children: [
-      { path: ':id', component: ServerComponent},
+      { path: ':id', component: ServerComponent, resolve: {server: ServerResolverService} },
       { path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateService]}
     ]},
     {path: 'not-found', component: PageNotFoundComponent},

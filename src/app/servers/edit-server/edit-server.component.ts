@@ -1,9 +1,10 @@
+import { Server } from './../server/server.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { CanComponentDeactivate } from './can-deactivate.service';
 import { Observable } from 'rxjs';
+import { CanComponentDeactivate } from './can-deactivate.service';
 
 @Component({
   selector: 'app-edit-server',
@@ -11,30 +12,34 @@ import { Observable } from 'rxjs';
   styleUrls: ['./edit-server.component.css']
 })
 export class EditServerComponent implements OnInit, CanComponentDeactivate {
-  server: {id: number, name: string, status: string};
+  server: Server;
   serverName = '';
   serverStatus = '';
   allowEdit = false;
   changesSaved = false;
 
   constructor(private serversService: ServersService,
-      private activatedRoute: ActivatedRoute,
-      private router: Router) { }
+      private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe((params: Params)=>{
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.allowEdit = params['allowEdit'] === '1' ? true : false;
+      this.server = this.serversService.getServer(+this.activatedRoute.snapshot.params['id']);
+      console.log(this.server);
     });
-    this.server = this.serversService.getServer(1);
-    this.serverName = this.server.name;
-    this.serverStatus = this.server.status;
+    if (this.server) {
+      this.serverName = this.server.name;
+      this.serverStatus = this.server.status;
+    }
   }
 
   onUpdateServer() {
-    this.serversService.updateServer(this.server.id, {name: this.serverName, status: this.serverStatus});
-    this.changesSaved = true;
+    this.server.name = this.serverName;
+    this.server.status = this.serverStatus;
+    this.serversService.updateServer(this.server.id, this.server);
     this.router.navigate(['../'], {relativeTo: this.activatedRoute});
   }
+
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     if(!this.allowEdit) {

@@ -1,3 +1,4 @@
+import { ServerResolverService } from './servers/server/server-resolver.service';
 import { CanDeactivateService } from './servers/edit-server/can-deactivate.service';
 import { AuthService } from './auth-service';
 import { AuthGuardService } from './auth-guard.service';
@@ -38,7 +39,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     RouterModule,
     AppRoutingModule
   ],
-  providers: [ServersService, UsersService, AuthGuardService, AuthService, CanDeactivateService],
+  providers: [ServersService, UsersService, AuthGuardService, AuthService, CanDeactivateService, ServerResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
