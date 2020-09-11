@@ -1,3 +1,4 @@
+import { CanDeactivateService } from './servers/edit-server/can-deactivate.service';
 import { AuthService } from './auth-service';
 import { AuthGuardService } from './auth-guard.service';
 import { RouterModule } from '@angular/router';
@@ -37,7 +38,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     RouterModule,
     AppRoutingModule
   ],
-  providers: [ServersService, UsersService, AuthGuardService, AuthService],
+  providers: [ServersService, UsersService, AuthGuardService, AuthService, CanDeactivateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
