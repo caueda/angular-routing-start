@@ -1,3 +1,4 @@
+import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthGuardService } from './auth-guard.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
@@ -22,7 +23,8 @@ const appRoutes: Route[] = [
       { path: ':id', component: ServerComponent},
       { path: ':id/edit', component: EditServerComponent}
     ]},
-    {path: 'not-found', component: PageNotFoundComponent},
+    //{path: 'not-found', component: PageNotFoundComponent},
+    {path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found'}},
     {path: '**', redirectTo: '/not-found'}
   ];
 
